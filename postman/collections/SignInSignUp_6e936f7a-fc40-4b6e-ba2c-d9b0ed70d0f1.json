@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "3cd235c8-866b-437b-bf19-e9c54a1001b5",
+		"name": "SignIn/SignUp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SignUp Process",
+			"item": [
+				{
+					"name": "signUp",
+					"id": "c0d86de5-b7ca-4cf3-904e-c63b9dc0847a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"syedshah22\",\r\n    \"email\": \"syed2@applybox.co.uk\",\r\n    \"MobileNumber\":\"+447985763982\",\r\n    \"password\":\"syed1234\",\r\n    \"FirstName\": \"Syed\",\r\n    \"LastName\":\"Shah\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/signUp",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "requestCode",
+					"id": "f3d6be9a-22ae-4eda-b762-3afc54afdbf1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"05aed99247d700a369481be654551200a585b9a3e3f31aeee5aba9c22d22704a9bc0371b382d586f1ec908125036a8f428dd10e802d178c5864c61a9ba4b590cdd023754ab1b5179fc75ada9539a2f80f39df52abf4bae639aaa4ee8af55e0f12ea1\",\n    \"codeType\": \"email\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/requestCode/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"requestCode",
+								""
+							],
+							"query": [
+								{
+									"key": "encryptedKey",
+									"value": "xsTrekXr30p@",
+									"description": "Encrypted UserID",
+									"disabled": true
+								},
+								{
+									"key": "medium",
+									"value": "phone",
+									"description": "phone or email",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyCode",
+					"id": "eb10b35f-30d9-464c-ab7e-dcf9404decb2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"abf69ef69d41a3770d95c00ac21a6c27cf520a5142c064941e039baab5c7562fd5333c55611ce6815bd72a50d4ea27ab1d6e97c8f93766881629e785ea32df8f03d294203a39409c2b8b604beffc8004c1359c4ca3e67ed62e06901b0516427c4a9f\",\n    \"token\":\"89600\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/verifyCode",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"verifyCode"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "503f6455-e351-4f88-8bb9-2ceb1274f4d9"
+		},
+		{
+			"name": "SignIn Process",
+			"item": [
+				{
+					"name": "signIn",
+					"id": "32ca15b2-ae73-4418-84c8-1c2577bb151c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"identifier\": \"+923108077509\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/auth/local",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"local"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d4824ebf-fb26-4d2e-9700-7879d14d5287",
+							"name": "Validated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"identifier\": \"syed.shah@applybox.co.uk\",\r\n\"password\":\"H3ll@Kitti\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://212.71.237.219:1337/api/auth/local",
+									"protocol": "http",
+									"host": [
+										"212",
+										"71",
+										"237",
+										"219"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"auth",
+										"local"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"jwt\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTY1NzEwNjI3NywiZXhwIjoxNjU5Njk4Mjc3fQ.sYS6X0mRlWvi07G4c4oFMS1NYeENhHP_-o-ZtaukFzY\",\n    \"user\": {\n        \"id\": 12,\n        \"username\": \"snushah\",\n        \"email\": \"syed.shah@applybox.co.uk\",\n        \"provider\": \"local\",\n        \"confirmed\": true,\n        \"blocked\": false,\n        \"createdAt\": \"2022-06-29T13:36:36.204Z\",\n        \"updatedAt\": \"2022-07-06T11:17:55.079Z\",\n        \"FirstName\": \"Syed Shah\",\n        \"LastName\": null,\n        \"MobileNumber\": null,\n        \"balance\": null\n    }\n}"
+						},
+						{
+							"id": "8b23d5e5-4097-40a7-bb8f-e54d03b0fcfc",
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"identifier\": \"syed.shah@applybox.co.uk\",\r\n\"password\":\"H3lkwkwkwkwkwk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/auth/local",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"local"
+									]
+								}
+							},
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"data\": null,\n    \"error\": {\n        \"status\": 400,\n        \"name\": \"ValidationError\",\n        \"message\": \"Invalid identifier or password\",\n        \"details\": {}\n    }\n}"
+						},
+						{
+							"id": "60ef6adb-b519-4917-a06e-74d58d74e5db",
+							"name": "Email/Phone not validate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\":\"fahad@gmail.com\",\r\n    \"password\":\"fahad123\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/auth/local",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"local"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"data\": null,\n    \"error\": {\n        \"status\": 400,\n        \"name\": \"ApplicationError\",\n        \"message\": \"Your account email is not confirmed\",\n        \"details\": {}\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "requestCode",
+					"id": "cb7d89da-0119-40c8-89e2-7ac5f7a593fb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"05aed99247d700a369481be654551200a585b9a3e3f31aeee5aba9c22d22704a9bc0371b382d586f1ec908125036a8f428dd10e802d178c5864c61a9ba4b590cdd023754ab1b5179fc75ada9539a2f80f39df52abf4bae639aaa4ee8af55e0f12ea1\",\n    \"codeType\": \"email\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/requestCode/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"requestCode",
+								""
+							],
+							"query": [
+								{
+									"key": "encryptedKey",
+									"value": "xsTrekXr30p@",
+									"description": "Encrypted UserID",
+									"disabled": true
+								},
+								{
+									"key": "medium",
+									"value": "phone",
+									"description": "phone or email",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyCode",
+					"id": "23733428-1a58-47ed-8ec1-3d4ea1c94a72",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"abf69ef69d41a3770d95c00ac21a6c27cf520a5142c064941e039baab5c7562fd5333c55611ce6815bd72a50d4ea27ab1d6e97c8f93766881629e785ea32df8f03d294203a39409c2b8b604beffc8004c1359c4ca3e67ed62e06901b0516427c4a9f\",\n    \"token\":\"89600\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/verifyCode",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"verifyCode"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "0e20745d-3f6c-4570-a615-9318100fb6f9"
+		}
+	]
+}

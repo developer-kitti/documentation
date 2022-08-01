@@ -1,0 +1,1170 @@
+{
+	"info": {
+		"_postman_id": "af650aa5-ae10-4d02-827e-a6954dad0a7a",
+		"name": "Donations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Donate",
+			"item": [
+				{
+					"name": "createDonation",
+					"id": "a4a578be-4e03-4174-a0db-b9ab99be2ffc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"donationType\":\"charity\",// charity, fundraise,\r\n    \"charityIds\":  // We may have one or more charities\r\n        [\r\n            {\r\n           \"charityId\":\"540211221\", // or ein No\r\n           \"Amount\":\"10\"\r\n        },\r\n          {\r\n           \"charityId\":\"6545544\", // or ein No\r\n           \"Amount\":\"10\"\r\n        },\r\n          {\r\n           \"charityId\":\"65989663\", // or ein No\r\n           \"Amount\":\"5.08\"\r\n        }\r\n        ]\r\n    ,\r\n    \"fundraiserId\":\"5609\",\r\n    \"charityAmount\":\"25.09\",\r\n    \"message\":\"Keep up the good work. Hope this helps with your laters projects.\",\r\n    \"tipAmount\":\"2.59\",\r\n    \"total\":\"27.68\",\r\n    \"currency\":\"usd\",\r\n    \"title\":\"Mr\",\r\n    \"nameOnTheCard\":\"Jon Doe\",\r\n    \"cardNumber\":\"4444333322221111\",\r\n    \"expiry\":\"02/25\",\r\n    \"ccv\":\"\",\r\n    \"address\":{\r\n        \"firstLine\":\"\",\r\n        \"secondLine\":\"\",\r\n        \"state\":\"\",\r\n        \"zip\":\"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "**Background Process**\n\nCreate a record in Donation Table\n\na donation may have linked to multiple charities with amount)  \na donation may have tip for Kitti)  \na donation may have just one time or periodically repeat (Weekly / Monthly / Yearly) transaction.\n\nAdd transaction for the total amount, donationID, status  \nAttempt transaction payment on Stripe save response against Transaction (Success / Failed)  \nUpdate Donation Table (Last Transaction on, Status, Amount)\n\n**On Success**  \nCreate record for the Chartiy Donation Received,  \nCreate record for the tip received  \n  \nSend Confirmation Email (Payment Receipt) *(Create a separate service so we can use this method to resend confirmation email)*  \nResponse Generate.\n\n**On Failed**\n\nResponse Generate."
+					},
+					"response": []
+				}
+			],
+			"id": "52189d84-970a-40fc-b46a-29649d0d49f1"
+		},
+		{
+			"name": "donateCharitySteps",
+			"item": [
+				{
+					"name": "addDonation",
+					"id": "fa476e43-4afe-4b84-9880-941efa63c614",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n    \"FirstName\":\"Xavier David\",\r\n    \"LastName\":\"David\",\r\n    \"Message\":\"this is a test donation\",\r\n    \"Email\":\"xavier@applybox.co.uk\",\r\n    \"Mobile\":\"+923108077513\",\r\n    \"Amount\":\"50.01\",\r\n    \"PaymentTerm\":\"Monthly\",\r\n    \"charities\":[\"1542973\", \"926618\"],\r\n    \"fundraiseds\":\"1\",\r\n    \"currency\":\"1\",\r\n    \"kitti_fee\":\"2.59\",\r\n    \"total\":\"53.60\",\r\n    \"step\":1,\r\n    \"usertype\":\"Anonymous\",\r\n    \"createUser\":\"No\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/dontations",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"dontations"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "7ad3c8b0-edfa-4267-acc1-1411fe23ba7e",
+							"name": "addDonation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n    \"FirstName\":\"Ahmed\",\r\n    \"LastName\":\"Khan\",\r\n    \"Message\":\"this is a test donation 2\",\r\n    \"Email\":\"fahad.hss@applybox.co.uk\",\r\n    \"Mobile\":\"+923108077519\",\r\n    \"Amount\":\"100.01\",\r\n    \"PaymentTerm\":\"Monthly\",\r\n    \"charities\":[\"1542973\", \"926618\"],\r\n    \"fundraiseds\":\"1\",\r\n    \"currency\":\"1\",\r\n    \"kitti_fee\":\"2.59\",\r\n    \"total\":\"102.59\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/dontations",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"dontations"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "143"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Jul 2022 15:23:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"donation has been added\",\n    \"donation_id\": 31,\n    \"user_id\": 1,\n    \"donation\": 100.01,\n    \"kitti_fee\": 2.59,\n    \"total\": 102.59,\n    \"next_step\": \"make payment\"\n}"
+						},
+						{
+							"id": "da3502ad-8a69-40c8-a291-c32b9e8b1edb",
+							"name": "addDonation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n    \"FirstName\":\"Jehangir Ahmed\",\r\n    \"LastName\":\"Khan\",\r\n    \"Message\":\"this is a test donation\",\r\n    \"Email\":\"fahassd.h@applybox.co.uk\",\r\n    \"Mobile\":\"+923108077510\",\r\n    \"Amount\":\"80.01\",\r\n    \"PaymentTerm\":\"OneOff\",\r\n    \"charities\":[\"1542973\", \"926618\"],\r\n    \"fundraiseds\":\"1\",\r\n    \"currency\":\"1\",\r\n    \"kitti_fee\":\"2.59\",\r\n    \"total\":\"102.59\",\r\n    \"step\":1,\r\n    \"userType\":\"Anonymous\",\r\n    \"createUser\":\"No\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/dontations",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"dontations"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "130"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Jul 2022 15:49:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"donation has been added\",\n    \"donation_id\": 80,\n    \"donation\": 80.01,\n    \"kitti_fee\": 2.59,\n    \"total\": 102.59,\n    \"next_step\": \"make payment\"\n}"
+						}
+					]
+				},
+				{
+					"name": "makePayment",
+					"id": "1576c204-e7d9-4610-8f26-c5e160a5dc81",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Fahad Saeed\",\r\n    \"card_number\":\"1234-5678-91011\",\r\n    \"card_expiry\":\"2025-07-16\",\r\n    \"ccv_code\":\"1234\",\r\n    \"payment_method\":\"1\",\r\n    \"donation\":\"1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/payment-details",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"payment-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "796fa5d7-26c7-4baa-8ffa-91e2c5c57460",
+							"name": "makePayment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Ahmed Khan\",\r\n    \"card_number\":\"1234-5678-91011\",\r\n    \"card_expiry\":\"2025-07-16\",\r\n    \"ccv_code\":\"1234\",\r\n    \"payment_method\":\"1\",\r\n    \"dontation\":\"31\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/payment-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"payment-details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "284"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Jul 2022 15:27:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"data\": {\n        \"id\": 3,\n        \"attributes\": {\n            \"title\": \"Mr\",\n            \"name\": \"Ahmed Khan\",\n            \"card_number\": \"1234-5678-91011\",\n            \"card_expiry\": \"2025-07-16\",\n            \"ccv_code\": 1234,\n            \"createdAt\": \"2022-07-21T15:27:30.167Z\",\n            \"updatedAt\": \"2022-07-21T15:27:30.167Z\",\n            \"publishedAt\": \"2022-07-21T15:27:30.162Z\",\n            \"user_id\": null\n        }\n    },\n    \"meta\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "addPaymentDetails",
+					"id": "a6443609-da6f-40e6-962b-26f5c0818afa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addBillingDetails",
+					"id": "86fa918a-20ae-4d4d-8b35-407503fb0ff3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n        \"address\":\"st-9, notingham, United Kingdom\",\r\n        \"state\":\"Notingham\",\r\n        \"zip\":\"1234\",\r\n        \"payment_detail\":\"3\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"userID\":\"1\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/billing-details",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"billing-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b3dd60f1-a2ff-4aa5-b11f-0a2b51747895",
+							"name": "addBillingDetails",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n        \"address\":\"st-9, notingham, United Kingdom\",\r\n        \"state\":\"Notingham\",\r\n        \"zip\":\"1234\",\r\n        \"payment_detail\":\"3\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"userID\":\"1\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/billing-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"billing-details"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Jul 2022 11:14:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Billing details has been added\",\n    \"billing_id\": 12,\n    \"transaction\": {\n        \"id\": 34,\n        \"amount\": 102.59,\n        \"fee\": 2.59,\n        \"status\": \"Successful\",\n        \"kittiTIP\": 3.05,\n        \"stripeTransactionId\": \"1234-4343-232\",\n        \"stripeUserId\": \"23432\",\n        \"createdAt\": \"2022-07-22T11:14:48.287Z\",\n        \"updatedAt\": \"2022-07-22T11:14:48.287Z\",\n        \"publishedAt\": \"2022-07-22T11:14:48.283Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "addAllDonationDetails",
+					"id": "61061958-f5fc-45c0-884a-49980165fb64",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Fahad Saeed\",\r\n    \"card_number\":\"4242424242424242\",\r\n    \"card_expiry\":\"2023-07-16\",\r\n    \"ccv_code\":\"314\",\r\n    \"payment_method\":\"1\",\r\n        \"address\":\"st-11, breadfordshire, United Kingdom\",\r\n        \"state\":\"Breadfordshire\",\r\n        \"zip\":\"1234\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\",\r\n        \"donation_id\":87\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/billing-details",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"billing-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "43069855-dda1-4ae2-9a5b-743c05585abf",
+							"name": "addBillingDetails",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n        \"address\":\"st-9, notingham, United Kingdom\",\r\n        \"state\":\"Notingham\",\r\n        \"zip\":\"1234\",\r\n        \"payment_detail\":\"3\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"userID\":\"1\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/billing-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"billing-details"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Jul 2022 11:14:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Billing details has been added\",\n    \"billing_id\": 12,\n    \"transaction\": {\n        \"id\": 34,\n        \"amount\": 102.59,\n        \"fee\": 2.59,\n        \"status\": \"Successful\",\n        \"kittiTIP\": 3.05,\n        \"stripeTransactionId\": \"1234-4343-232\",\n        \"stripeUserId\": \"23432\",\n        \"createdAt\": \"2022-07-22T11:14:48.287Z\",\n        \"updatedAt\": \"2022-07-22T11:14:48.287Z\",\n        \"publishedAt\": \"2022-07-22T11:14:48.283Z\"\n    }\n}"
+						},
+						{
+							"id": "85285ad9-d132-4156-9858-25f553e62450",
+							"name": "addAllDonationDetails",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Fahad Saeed\",\r\n    \"card_number\":\"1234-5678-91011\",\r\n    \"card_expiry\":\"2025-07-16\",\r\n    \"ccv_code\":\"1234\",\r\n    \"payment_method\":\"1\",\r\n        \"address\":\"st-9, notingham, United Kingdom\",\r\n        \"state\":\"Notingham\",\r\n        \"zip\":\"1234\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\",\r\n        \"donation_id\":80\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/billing-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"billing-details"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "328"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Jul 2022 15:51:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Billing details has been added\",\n    \"billing_id\": 23,\n    \"transaction\": {\n        \"id\": 55,\n        \"amount\": 80.01,\n        \"fee\": 2.59,\n        \"status\": \"Successful\",\n        \"kittiTIP\": 3.05,\n        \"stripeTransactionId\": \"1234-4343-232\",\n        \"stripeUserId\": \"23432\",\n        \"createdAt\": \"2022-07-25T15:51:21.854Z\",\n        \"updatedAt\": \"2022-07-25T15:51:21.854Z\",\n        \"publishedAt\": \"2022-07-25T15:51:21.848Z\"\n    }\n}"
+						},
+						{
+							"id": "2cc0cc49-e2db-498b-a480-1e8126b40b9d",
+							"name": "addAllDonationDetails",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Fahad Saeed\",\r\n    \"card_number\":\"4242424242424242\",\r\n    \"card_expiry\":\"2023-07-16\",\r\n    \"ccv_code\":\"314\",\r\n    \"payment_method\":\"1\",\r\n        \"address\":\"st-11, breadfordshire, United Kingdom\",\r\n        \"state\":\"Breadfordshire\",\r\n        \"zip\":\"1234\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\",\r\n        \"donation_id\":85\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/billing-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"billing-details"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "328"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Jul 2022 15:52:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"message\": \"Billing details has been added\",\n    \"billing_id\": 28,\n    \"transaction\": {\n        \"id\": 60,\n        \"amount\": 50.01,\n        \"fee\": 2.59,\n        \"status\": \"Successful\",\n        \"kittiTIP\": 3.05,\n        \"stripeTransactionId\": \"1234-4343-232\",\n        \"stripeUserId\": \"23432\",\n        \"createdAt\": \"2022-07-26T15:52:53.281Z\",\n        \"updatedAt\": \"2022-07-26T15:52:53.281Z\",\n        \"publishedAt\": \"2022-07-26T15:52:53.276Z\"\n    }\n}"
+						},
+						{
+							"id": "78c5b07d-5713-4495-a7d0-3a38828a72ec",
+							"name": "addAllDonationDetails",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n    \"title\":\"Mr\",\r\n    \"name\":\"Fahad Saeed\",\r\n    \"card_number\":\"4242424242424242\",\r\n    \"card_expiry\":\"2023-07-16\",\r\n    \"ccv_code\":\"314\",\r\n    \"payment_method\":\"1\",\r\n        \"address\":\"st-11, breadfordshire, United Kingdom\",\r\n        \"state\":\"Breadfordshire\",\r\n        \"zip\":\"1234\",\r\n        \"status\":\"Successful\",\r\n        \"kittiTIP\":\"3.05\",\r\n        \"stripeTransactionId\":\"1234-4343-232\",\r\n        \"stripeUserId\":\"23432\",\r\n        \"donation_id\":87\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/billing-details",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"billing-details"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "728"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Jul 2022 14:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"payment_data\": {\n        \"id\": 49,\n        \"title\": \"Mr\",\n        \"name\": \"Fahad Saeed\",\n        \"card_number\": \"4242424242424242\",\n        \"card_expiry\": \"2023-07-16\",\n        \"ccv_code\": 314,\n        \"createdAt\": \"2022-07-27T14:38:23.258Z\",\n        \"updatedAt\": \"2022-07-27T14:38:23.258Z\",\n        \"publishedAt\": null,\n        \"user_id\": null\n    },\n    \"billing_data\": {\n        \"id\": 32,\n        \"address\": \"st-11, breadfordshire, United Kingdom\",\n        \"address_line2\": null,\n        \"state\": \"Breadfordshire\",\n        \"zip\": \"1234\",\n        \"createdAt\": \"2022-07-27T14:38:23.293Z\",\n        \"updatedAt\": \"2022-07-27T14:38:23.293Z\",\n        \"user_id\": null\n    },\n    \"transaction\": {\n        \"id\": 64,\n        \"amount\": 50.01,\n        \"fee\": 2.59,\n        \"status\": \"Successful\",\n        \"kittiTIP\": 3.05,\n        \"stripeTransactionId\": null,\n        \"stripeUserId\": null,\n        \"createdAt\": \"2022-07-27T14:38:23.287Z\",\n        \"updatedAt\": \"2022-07-27T14:38:23.287Z\",\n        \"publishedAt\": \"2022-07-27T14:38:23.282Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "sendReceipt",
+					"id": "8c0e0db8-0853-4410-aa32-fa07212f68be",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "stepUpdate",
+					"id": "90b924b5-909d-408e-b35e-169bedf838e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id\":80,\r\n    \"step\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/donations/step-update",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"donations",
+								"step-update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDonationStep",
+					"id": "5a1776f8-d72b-4d72-a3cb-edeb983784fd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/donations/step-get?id=80",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"donations",
+								"step-get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "80"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubscriptionTransaction",
+					"id": "5ccf1bf7-264a-4ed8-9255-2771f863b1bd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "70b48664-8b4a-49db-a07a-7dad8ee7c75d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"evt_3LQS5zFQvjvqyzQm0fxZwtVW\",\r\n  \"object\": \"event\",\r\n  \"api_version\": \"2020-08-27\",\r\n  \"created\": 1658996968,\r\n  \"data\": {\r\n    \"object\": {\r\n      \"id\": \"pi_3LQS5zFQvjvqyzQm0zrUs6lw\",\r\n      \"object\": \"payment_intent\",\r\n      \"amount\": 50,\r\n      \"amount_capturable\": 0,\r\n      \"amount_details\": {\r\n        \"tip\": {\r\n        }\r\n      },\r\n      \"amount_received\": 50,\r\n      \"application\": null,\r\n      \"application_fee_amount\": null,\r\n      \"automatic_payment_methods\": null,\r\n      \"canceled_at\": null,\r\n      \"cancellation_reason\": null,\r\n      \"capture_method\": \"automatic\",\r\n      \"charges\": {\r\n        \"object\": \"list\",\r\n        \"data\": [\r\n          {\r\n            \"id\": \"ch_3LQS5zFQvjvqyzQm09UQVpxY\",\r\n            \"object\": \"charge\",\r\n            \"amount\": 50,\r\n            \"amount_captured\": 50,\r\n            \"amount_refunded\": 0,\r\n            \"application\": null,\r\n            \"application_fee\": null,\r\n            \"application_fee_amount\": null,\r\n            \"balance_transaction\": \"txn_3LQS5zFQvjvqyzQm0Uov36I3\",\r\n            \"billing_details\": {\r\n              \"address\": {\r\n                \"city\": null,\r\n                \"country\": null,\r\n                \"line1\": \"st-11, breadfordshire, United Kingdom\",\r\n                \"line2\": null,\r\n                \"postal_code\": \"1234\",\r\n                \"state\": \"Breadfordshire\"\r\n              },\r\n              \"email\": \"xavier@applybox.co.uk\",\r\n              \"name\": \"Xavier David David\",\r\n              \"phone\": \"+923108077513\"\r\n            },\r\n            \"calculated_statement_descriptor\": \"WWW.KITTI.COM\",\r\n            \"captured\": true,\r\n            \"created\": 1658996967,\r\n            \"currency\": \"usd\",\r\n            \"customer\": \"cus_M8jZXhUWjQ6Vnv\",\r\n            \"description\": \"Subscription creation\",\r\n            \"destination\": null,\r\n            \"dispute\": null,\r\n            \"disputed\": false,\r\n            \"failure_balance_transaction\": null,\r\n            \"failure_code\": null,\r\n            \"failure_message\": null,\r\n            \"fraud_details\": {\r\n            },\r\n            \"invoice\": \"in_1LQS5yFQvjvqyzQmSuCXU4Br\",\r\n            \"livemode\": false,\r\n            \"metadata\": {\r\n            },\r\n            \"on_behalf_of\": null,\r\n            \"order\": null,\r\n            \"outcome\": {\r\n              \"network_status\": \"approved_by_network\",\r\n              \"reason\": null,\r\n              \"risk_level\": \"normal\",\r\n              \"risk_score\": 22,\r\n              \"seller_message\": \"Payment complete.\",\r\n              \"type\": \"authorized\"\r\n            },\r\n            \"paid\": true,\r\n            \"payment_intent\": \"pi_3LQS5zFQvjvqyzQm0zrUs6lw\",\r\n            \"payment_method\": \"pm_1LQS5vFQvjvqyzQmkmZ5N9zc\",\r\n            \"payment_method_details\": {\r\n              \"card\": {\r\n                \"brand\": \"visa\",\r\n                \"checks\": {\r\n                  \"address_line1_check\": \"pass\",\r\n                  \"address_postal_code_check\": \"pass\",\r\n                  \"cvc_check\": \"pass\"\r\n                },\r\n                \"country\": \"US\",\r\n                \"exp_month\": 7,\r\n                \"exp_year\": 2023,\r\n                \"fingerprint\": \"2a7KTRkwD8buzt1r\",\r\n                \"funding\": \"credit\",\r\n                \"installments\": null,\r\n                \"last4\": \"4242\",\r\n                \"mandate\": null,\r\n                \"network\": \"visa\",\r\n                \"three_d_secure\": null,\r\n                \"wallet\": null\r\n              },\r\n              \"type\": \"card\"\r\n            },\r\n            \"receipt_email\": null,\r\n            \"receipt_number\": null,\r\n            \"receipt_url\": \"https://pay.stripe.com/receipts/invoices/CAcaFwoVYWNjdF8xTDBvcmFGUXZqdnF5elFtKOmRiZcGMgaQ_-CrmWs6LBbJSuVJq_eaQc_OPNY6egEz_1aRlYm2Pt9IX8PZglFBjm-39c0JzNtnA1dP?s=ap\",\r\n            \"refunded\": false,\r\n            \"refunds\": {\r\n              \"object\": \"list\",\r\n              \"data\": [\r\n              ],\r\n              \"has_more\": false,\r\n              \"total_count\": 0,\r\n              \"url\": \"/v1/charges/ch_3LQS5zFQvjvqyzQm09UQVpxY/refunds\"\r\n            },\r\n            \"review\": null,\r\n            \"shipping\": null,\r\n            \"source\": null,\r\n            \"source_transfer\": null,\r\n            \"statement_descriptor\": null,\r\n            \"statement_descriptor_suffix\": null,\r\n            \"status\": \"succeeded\",\r\n            \"transfer_data\": null,\r\n            \"transfer_group\": null\r\n          }\r\n        ],\r\n        \"has_more\": false,\r\n        \"total_count\": 1,\r\n        \"url\": \"/v1/charges?payment_intent=pi_3LQS5zFQvjvqyzQm0zrUs6lw\"\r\n      },\r\n      \"client_secret\": \"pi_3LQS5zFQvjvqyzQm0zrUs6lw_secret_vw05i1UgkqRMeR8hoM5x9qrPn\",\r\n      \"confirmation_method\": \"automatic\",\r\n      \"created\": 1658996967,\r\n      \"currency\": \"usd\",\r\n      \"customer\": \"cus_M8jZXhUWjQ6Vnv\",\r\n      \"description\": \"Subscription creation\",\r\n      \"invoice\": \"in_1LQS5yFQvjvqyzQmSuCXU4Br\",\r\n      \"last_payment_error\": null,\r\n      \"livemode\": false,\r\n      \"metadata\": {\r\n      },\r\n      \"next_action\": null,\r\n      \"on_behalf_of\": null,\r\n      \"payment_method\": \"pm_1LQS5vFQvjvqyzQmkmZ5N9zc\",\r\n      \"payment_method_options\": {\r\n        \"card\": {\r\n          \"installments\": null,\r\n          \"mandate_options\": null,\r\n          \"network\": null,\r\n          \"request_three_d_secure\": \"automatic\"\r\n        }\r\n      },\r\n      \"payment_method_types\": [\r\n        \"card\"\r\n      ],\r\n      \"processing\": null,\r\n      \"receipt_email\": null,\r\n      \"review\": null,\r\n      \"setup_future_usage\": \"off_session\",\r\n      \"shipping\": null,\r\n      \"source\": null,\r\n      \"statement_descriptor\": null,\r\n      \"statement_descriptor_suffix\": null,\r\n      \"status\": \"succeeded\",\r\n      \"transfer_data\": null,\r\n      \"transfer_group\": null\r\n    }\r\n  },\r\n  \"livemode\": false,\r\n  \"pending_webhooks\": 1,\r\n  \"request\": {\r\n    \"id\": \"req_ICck3SqQc1DvNs\",\r\n    \"idempotency_key\": \"87f7eb3d-2f94-40b1-b311-a6dc04182de4\"\r\n  },\r\n  \"type\": \"payment_intent.succeeded\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/payment/get-transaction",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"payment",
+								"get-transaction"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "21695b47-b374-4338-a770-332f9d89fa87"
+		},
+		{
+			"name": "donateFundraiseSteps",
+			"item": [
+				{
+					"name": "addDonation",
+					"id": "dec9e2b4-6cbb-4126-84aa-8d39195a32b1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addATip",
+					"id": "d31f5ac8-46d0-4e47-9021-955681ef95b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "makePayment",
+					"id": "ed9a9c33-5dbe-41cf-85d1-493bbb2a0bf5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addPaymentDetails",
+					"id": "28b07bee-fa57-433d-a967-cc873f0ddae5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addBillingDetails",
+					"id": "22d70502-98dd-4292-a77e-d159edca51e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "sendReceipt",
+					"id": "efa82a46-2bf2-4992-8487-14d5be0d9cae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "bc948efa-718a-4d70-bc21-df0b82946e4b"
+		}
+	]
+}

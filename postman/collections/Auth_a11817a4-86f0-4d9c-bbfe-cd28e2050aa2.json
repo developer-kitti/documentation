@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "513274f9-1136-4dee-a468-8b1ee66cbf6e",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "donateCharitySteps",
+			"item": [
+				{
+					"name": "addDonation",
+					"id": "9913dc77-8bb9-420f-bdaf-a4224c091599",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "makePayment",
+					"id": "b24f8de4-a629-4d60-bbf4-317a98be5968",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addPaymentDetails",
+					"id": "6919c1a7-6f80-4de3-833f-e3deb829d19c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addBillingDetails",
+					"id": "179fe5aa-5696-49e7-a60a-de1beb0221d5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "sendReceipt",
+					"id": "b6a34563-4a60-4be2-9675-635228b323db",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "3869a29a-9fab-4c25-b42b-925dfd824372"
+		},
+		{
+			"name": "donateFundraiseSteps",
+			"item": [
+				{
+					"name": "addDonation",
+					"id": "83ade4d6-a400-4d48-920e-e60d9aee4bcc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addATip",
+					"id": "a97d852f-7fac-41aa-82be-4279fe67dba8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "makePayment",
+					"id": "aae0d7a2-5bc3-46b5-bb97-88b51f8b14b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addPaymentDetails",
+					"id": "ad1c7bb0-18a7-4db2-babe-856e26c9d8e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addBillingDetails",
+					"id": "fe33a1ed-22b6-40f2-b7c5-9c81ddb37ec6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "sendReceipt",
+					"id": "bd0b58e1-e53d-4ac8-b4bf-0d601d9992c8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "5b5ac75a-71f7-41fc-90b1-ba7ab601648a"
+		},
+		{
+			"name": "Fundraise",
+			"item": [
+				{
+					"name": "addFundraise",
+					"id": "ab50fc57-2fa2-4620-88ad-9250b07ae64e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n        {\n  \"data\": {\n        \"isEvent\":true,                                                            // Are you raising for an event\n        \"headline\": \"Simon is raising money for New York Marathon\",                 // Name of the Event\n        \"target\":5000,                                                               //Target\n        \"eventDate\": \"2022-09-01\",                                                  //Closing Date\n        \"about\": \"I am running for the new york marathon, please help this charity \", // Tellus why you are raising money\n        \"active\":true                                                           // By Default Visible or not\n     }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/fundraise-campaigns",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"fundraise-campaigns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createFundraise",
+					"id": "128bf228-1637-4a7e-9536-25a179d83a57",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"isEvent\":false, \n        \"charityID\":417743,                                                            \n        \"eventName\": \"Running for Marathon\",                \n        \"target\":5000,                                                             \n        \"closingDate\": \"2022-09-01\",                                                \n        \"tellUsWhy\": \"I am running for the new york marathon, please help this charity \",\n        \"photo\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/fundraise-campaign/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"fundraise-campaign",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fundraiseMessage",
+					"id": "bc8aa007-3f8f-434f-a788-f63d78e3491d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fundraiseID\":\"\",\n    \"firstName\":\"\",\n    \"lastName\":\"\",\n    \"message\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shareMyPage",
+					"id": "e174daf4-d9b7-4e7d-befd-c4cff628ac30",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fundraiseID\":\"80\",\n    \"email\":[\n            \"naved@kitti.com\"  \n    ],\n    \"mobile\":[\n        \"+447985763982\"\n      \n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/fundraise-campaign/shareMyPage",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"fundraise-campaign",
+								"shareMyPage"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c0d1c8af-85bc-47f8-828c-d4dd75025c98"
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Me",
+					"id": "c8a9f878-8f6d-453e-9a49-e2b5eb5fd419",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/me",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c6d15bca-9ed4-4518-8a34-af73bcbd7d44"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b09fdee5-8f2d-4607-a480-ace212af8e73",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "08292f41-2abc-41c6-b743-fae7781c883d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "92f6cc6a-e576-45d2-9f96-4e9e8f291e4b",
+			"key": "baseUrl",
+			"value": "localhost:3000",
+			"type": "string"
+		},
+		{
+			"id": "2991c79a-e177-4ee4-81cc-44e7b63bfa2d",
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjU4NDE5NzM2LCJleHAiOjE2NjEwMTE3MzZ9.hBaQZas-bHvDT8oeG1XtvBJ_4sosKM0vp6xyRfeKtY8",
+			"type": "string"
+		}
+	]
+}

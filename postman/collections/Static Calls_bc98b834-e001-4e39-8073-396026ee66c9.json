@@ -1,0 +1,923 @@
+{
+	"info": {
+		"_postman_id": "bfe6ef73-6ac5-4de7-a871-40cf62f487fe",
+		"name": "Static Calls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "GetCities",
+					"id": "ecba119f-05f9-412e-9ff7-69752f32f7ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/state-towns?filters[code][$eq]=NY&pagination[start]=0&pagination[limit]=50&fields[0]=town&fields[1]=code",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"state-towns"
+							],
+							"query": [
+								{
+									"key": "filters[code][$eq]",
+									"value": "NY",
+									"description": "Provide a State Code"
+								},
+								{
+									"key": "pagination[start]",
+									"value": "0"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "50",
+									"description": "Total Result on the Page"
+								},
+								{
+									"key": "fields[0]",
+									"value": "town"
+								},
+								{
+									"key": "fields[1]",
+									"value": "code"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "States",
+					"id": "744abc3e-0e63-4d4d-a8bb-d8c0e3f037d7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/states?sort[0]=id:asc&pagination[limit]=100&fields=Name&fields=Code",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"states"
+							],
+							"query": [
+								{
+									"key": "sort[0]",
+									"value": "id:asc"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "100"
+								},
+								{
+									"key": "fields",
+									"value": "Name"
+								},
+								{
+									"key": "fields",
+									"value": "Code"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "60535e5b-8a58-4de2-980e-789fd7c4ca0b"
+		},
+		{
+			"name": "Featured",
+			"item": [
+				{
+					"name": "FeaturedCharities",
+					"id": "df69ba6e-9812-4dbe-af71-f168cc50bb99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charities?filters[featured][$eq]=true&populate=*",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "filters[featured][$eq]",
+									"value": "true"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FeaturedNews",
+					"id": "ac6fed1c-6136-4634-aa02-d79ca5613d7d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/news-list/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"news-list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Featured Articles",
+					"id": "9c729d5b-8b47-4f73-8e11-1487b7458e7a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/articles?filters[featured][$eq]=true&populate=*",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							],
+							"query": [
+								{
+									"key": "filters[featured][$eq]",
+									"value": "true"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FeaturedFundraise",
+					"id": "a0116f11-f640-496e-a312-0e3b60ecc941",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/fundraise-campaigns?filters[featured][$eq]=true&populate=*",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"fundraise-campaigns"
+							],
+							"query": [
+								{
+									"key": "filters[featured][$eq]",
+									"value": "true"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "00efe4cb-5e74-4fb7-978e-25cbf197e2a2"
+		},
+		{
+			"name": "Search Charities",
+			"item": [
+				{
+					"name": "By Town",
+					"id": "4a5f168d-393b-4ce3-97b2-6c2ba3b96a08",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charities?filters[town][$eq]=Miami&populate=*&pagination[start]=0&pagination[limit]=50",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "filters[town][$eq]",
+									"value": "Miami"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[start]",
+									"value": "0"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Name",
+					"id": "4cf683cf-cc2c-46ed-aedf-40944a5293b3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charities?filters[name][$startsWith]=Gre&populate=*&pagination[start]=0&pagination[limit]=15&fields[0]=name&fields[1]=slug",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "filters[name][$startsWith]",
+									"value": "Gre"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[start]",
+									"value": "0"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "15"
+								},
+								{
+									"key": "fields[0]",
+									"value": "name",
+									"type": "text"
+								},
+								{
+									"key": "fields[1]",
+									"value": "slug",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By State",
+					"id": "7dc50df0-481f-4e8a-b636-ea2e09f7411d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charities?filters[state][$eq]=NJ&populate=*&pagination[start]=0&pagination[limit]=50",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "filters[state][$eq]",
+									"value": "NJ",
+									"description": "State Code"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[start]",
+									"value": "0"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Keywords",
+					"id": "271ca690-6a2e-4e0a-bb25-162ecb27b639",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charities?filters[ntee_code][$eq]=A20&populate=*&pagination[start]=0&pagination[limit]=50",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "filters[ntee_code][$eq]",
+									"value": "A20"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[start]",
+									"value": "0"
+								},
+								{
+									"key": "pagination[limit]",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "6d4f549d-5c19-4d1d-af8e-1607d07acfaf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "search charities by keywords",
+					"id": "00c90960-ef7f-42c7-b9ac-f5c35ed3c5fa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charity/find?keyword=FA0001",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charity",
+								"find"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "FA0001"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "7a515b98-dd51-4793-aae2-c5ba5b74b10f",
+							"name": "search charities by keywords",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/charity/find?keyword=FA0001",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"charity",
+										"find"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "FA0001"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "img-src 'self' data: kitti-assets.s3.amazonaws.com https://dl.airtable.com;connect-src 'self' https:;media-src 'self' data: blob:;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Strapi <strapi.io>"
+								},
+								{
+									"key": "Content-Length",
+									"value": "857"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Jul 2022 14:38:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "[\n    {\n        \"id\": 926618,\n        \"slug\": \"881439763\",\n        \"ein\": \"881439763\",\n        \"name\": \"0 TIENOU TI DIERO BAAFIRI\",\n        \"about\": null,\n        \"formed\": null,\n        \"employees\": null,\n        \"volunteers\": null,\n        \"kittiRaised\": null,\n        \"website\": null,\n        \"zip\": \"48910-4838\",\n        \"address\": \"2022 ROBINSON RD\",\n        \"twitterLink\": null,\n        \"Instragram\": null,\n        \"facebook\": null,\n        \"youtube\": null,\n        \"createdAt\": \"2022-06-13T21:53:35.535Z\",\n        \"updatedAt\": \"2022-07-22T14:26:46.105Z\",\n        \"publishedAt\": \"2022-06-13T21:55:52.000Z\",\n        \"featured\": true,\n        \"state\": \"MI\",\n        \"town\": \"LANSING\",\n        \"organization_name\": null,\n        \"missionstatement\": null,\n        \"logopath\": null,\n        \"ntee_code\": null,\n        \"sdg_description\": null,\n        \"sdg_id\": null,\n        \"sociialTwitter\": null,\n        \"socialGoogle\": null,\n        \"socialLinkeIn\": null,\n        \"socialYouTube\": null,\n        \"fye\": null,\n        \"total_liiabilities_eoy\": null,\n        \"total_revenue\": null,\n        \"total_expenses\": null,\n        \"program_description1\": null,\n        \"programm_expense1\": null,\n        \"program_description2\": null,\n        \"programm_expense2\": null\n    }\n]"
+						}
+					]
+				}
+			],
+			"id": "65b3bb44-0af6-48fb-8f52-99dbf9a3978b"
+		},
+		{
+			"name": "Categories/Keyword Search",
+			"item": [
+				{
+					"name": "Charity Categories",
+					"id": "d825e38d-8643-43ae-a8d0-1169350f5f04",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charity-categories?sort[0]=name:asc&fields[0]=name&fields[1]=slug&fields[2]=code",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charity-categories"
+							],
+							"query": [
+								{
+									"key": "sort[0]",
+									"value": "name:asc"
+								},
+								{
+									"key": "fields[0]",
+									"value": "name"
+								},
+								{
+									"key": "fields[1]",
+									"value": "slug"
+								},
+								{
+									"key": "fields[2]",
+									"value": "code"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category>Keywords",
+					"id": "dedb268f-4a26-43bc-b313-63a0025703d0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charity-categories/keywords",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charity-categories",
+								"keywords"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "B",
+									"disabled": true
+								},
+								{
+									"key": "slug",
+									"value": "unions-and-associations",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Animal %26 Pets",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Keywords>Charities",
+					"id": "fb6b2b5a-4e1b-4a8a-a6cf-07007b3c49fe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/charity-categories/charities?title=Spirituality",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"charity-categories",
+								"charities"
+							],
+							"query": [
+								{
+									"key": "code[]",
+									"value": "SP120000",
+									"disabled": true
+								},
+								{
+									"key": "slug",
+									"value": "unions-and-associations",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Spirituality",
+									"type": "text"
+								},
+								{
+									"key": "code[]",
+									"value": "SP120000",
+									"disabled": true
+								},
+								{
+									"key": "code[]",
+									"value": "SB050000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code[]",
+									"value": "SB070000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "town",
+									"value": "Newport",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Keywords",
+					"id": "ccbe49ac-cb9e-49e0-94fe-bb761a43a783",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/news-keywords?pagination[pageSize]=100&filters[ntees][code][$containsi]=D&fields[0]=title&fields[1]=code&fields[2]=priority&sort[0]=Priority:desc",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"news-keywords"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*",
+									"disabled": true
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "100"
+								},
+								{
+									"key": "filters[ntees][code][$containsi]",
+									"value": "D"
+								},
+								{
+									"key": "filters[ntees][code][$containsi]",
+									"value": "O",
+									"disabled": true
+								},
+								{
+									"key": "fields[0]",
+									"value": "title"
+								},
+								{
+									"key": "fields[1]",
+									"value": "code"
+								},
+								{
+									"key": "fields[2]",
+									"value": "priority"
+								},
+								{
+									"key": "sort[0]",
+									"value": "Priority:desc"
+								}
+							]
+						},
+						"description": "Keywords are linked with categories.\n\nTo get keyword list for each category you need to provide a code from category.\n\n`\"id\": 4,   \"attributes\": {   \"name\": \"Education\",   \"slug\": \"education\",   `**`\"code\": \"B\"`**`   }`"
+					},
+					"response": []
+				}
+			],
+			"id": "adeb72b0-04ae-4dc4-b598-d458185cdbb3",
+			"description": "Please follow the link below to collect Categories Information"
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Home",
+					"id": "443364b1-c02f-4c6f-a75e-e84443766908",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/pages?populate=*&filters[slug]=home",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"pages"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[slug]",
+									"value": "home"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terms of use",
+					"id": "9fab85a9-b205-4bfe-a589-9a76cf7e7d03",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/pages?populate=*&filters[slug]=Termsofuse",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"pages"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[slug]",
+									"value": "Termsofuse"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "About-Us",
+					"id": "775df5a2-0927-473b-bc2b-6bcc6df9bf99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/pages?populate=*&filters[slug]=about-us",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"pages"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[slug]",
+									"value": "about-us"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Charities Search Page",
+					"id": "ef6d9b3e-0046-45dc-81e5-0735f56d17b2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/pages?populate=*&filters[slug]=charities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"pages"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[slug]",
+									"value": "charities"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "News & Articles",
+					"id": "e4996ec3-48c7-4064-8642-91d80fd422a8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "News-Detail-Page",
+					"id": "26a7effd-58f3-4425-8675-69a380c2a3d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/news/helping-animal-royal-british-legion",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								"helping-animal-royal-british-legion"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "e0a95892-88e8-4857-aa03-8b8d74248493"
+		}
+	]
+}
